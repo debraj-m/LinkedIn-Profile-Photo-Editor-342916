@@ -1,0 +1,52 @@
+# netlify.toml
+
+# Build settings
+[build]
+  # Command to build the project
+  command = "npm run build"
+  
+  # Directory to publish (relative to the root of your repo)
+  publish = "build/"
+  
+  # Environment variables that will be available during the build process
+  # and in Netlify Functions.
+  [build.environment]
+    # Example: Set the Node.js version. Replace with the version you are using.
+    # NODE_VERSION = "18" 
+    # Example: Set a React app environment variable (must be prefixed with REACT_APP_)
+    # REACT_APP_API_BASE_URL = "https://api.example.com"
+
+# Redirects and rewrites
+# SPA redirect rule: Redirect all paths to index.html so client-side routing works.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Example of specific redirects (optional)
+# [[redirects]]
+#   from = "/old-path"
+#   to = "/new-path"
+#   status = 301 # Permanent redirect
+
+# Example of context-specific settings (e.g., for production)
+[context.production]
+  [context.production.environment]
+    # REACT_APP_API_KEY = "your_production_api_key_here"
+    # REACT_APP_ENVIRONMENT = "production"
+
+# Example for a deploy preview context
+# [context.deploy-preview]
+#   [context.deploy-preview.environment]
+#     REACT_APP_API_BASE_URL = "https://staging-api.example.com"
+#     REACT_APP_ENVIRONMENT = "staging"
+
+# Headers (optional)
+# You can define custom headers for your site.
+# [[headers]]
+#   for = "/*"
+#   [headers.values]
+#     X-Frame-Options = "DENY"
+#     X-XSS-Protection = "1; mode=block"
+#     # Add other security headers or cache control headers as needed
+#     Cache-Control = "public, max-age=0, must-revalidate" # Example for HTML files
